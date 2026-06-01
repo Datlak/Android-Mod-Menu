@@ -1,7 +1,7 @@
 name: Build Android Mod Menu APK
 
 on:
-  workflow_dispatch: # Cho phép bạn bấm nút chạy thủ công bất cứ lúc nào
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,6 +17,9 @@ jobs:
         distribution: 'zulu'
         java-version: '17'
         cache: 'gradle'
+
+    - name: Khởi tạo lại Gradle Wrapper bị thiếu
+      run: jar cfe gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain || gradle wrapper
 
     - name: Cấp quyền thực thi cho Gradle
       run: chmod +x gradlew
